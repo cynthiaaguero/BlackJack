@@ -8,7 +8,7 @@ var yourAceCount = 0;
 var hidden; //keep track of dealers hidden card
 var deck;
 
-var canHit; //allows the player to draw 
+var canHit = true; //allows the player to draw 
 
 window.onload = function(){
     buildDeck();
@@ -44,13 +44,50 @@ function startGame(){
     hidden = deck.pop();
     dealerSum += getValue(hidden);
     dealerAceCount+=checkAce(hidden);
-    console.log(hidden);
-    console.log(dealerSum);
+    // console.log(hidden);
+    // console.log(dealerSum);
+    while(dealerSum < 17){
+        let cardImg = document.createElement("img"); //object
+        let card = deck.pop();
+        cardImg.src = "./cards/" + card + ".png"; //setting image to object based on card number pulled
+        dealerSum += getValue(card);
+        dealerAceCount += checkAce(card);
+        document.getElementById("dealer-cards").append(cardImg);
+    }
+    for (let i = 0; i < 2; i++){
+        let cardImg = document.createElement("img"); //object
+        let card = deck.pop();
+        cardImg.src = "./cards/" + card + ".png"; //setting image to object based on card number pulled
+        yourSum += getValue(card);
+        yourAceCount += checkAce(card);
+        document.getElementById("your-cards").append(cardImg);
+    }
+
+    document.getElementById("hit").addEventListener("click", hit);
+    document.getElementById("stay").addEventListener("click", stay);
+}
+
+function hit(){
+    if(!canHit){
+        return;
+    }
+    let cardImg = document.createElement("img"); //object
+    let card = deck.pop();
+    cardImg.src = "./cards/" + card + ".png"; //setting image to object based on card number pulled
+    yourSum += getValue(card);
+    yourAceCount += checkAce(card);
+    document.getElementById("your-cards").append(cardImg);
 }
 
 function getValue(card){
-    let data = card.split("-");
-    let value = data[0];
+    let data = [];
+    for (let i = 0; i < card.length; i++) {
+        if (card[i] === "-") {
+          data.push(card.slice(0, i));
+          data.push(card.slice(i + 1));
+          break;
+        }
+      }    let value = data[0];
 
     if (isNaN(value)){
         if (value == "A"){
