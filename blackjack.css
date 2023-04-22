@@ -1,6 +1,7 @@
 body {
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
+    background-color: #C6D3FF;
 }
 
 #dealer-cards img {
@@ -16,12 +17,14 @@ body {
 }
 
 #hit{
+    background-color: #fff2c6;
     width: 100px;
     height: 50px;
     font-size: 20px;
 }
 
 #stay{
+    background-color: #fff2c6;
     width: 100px;
     height: 50px;
     font-size: 20px;
