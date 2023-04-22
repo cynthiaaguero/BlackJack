@@ -43,4 +43,27 @@ function shuffleDeck(){
 function startGame(){
     hidden = deck.pop();
     dealerSum += getValue(hidden);
+    dealerAceCount+=checkAce(hidden);
+    console.log(hidden);
+    console.log(dealerSum);
+}
+
+function getValue(card){
+    let data = card.split("-");
+    let value = data[0];
+
+    if (isNaN(value)){
+        if (value == "A"){
+            return 11;
+        }
+        return 10;
+    }
+    return parseInt(value);
+}
+
+function checkAce(card){
+        if (card[0] == "A"){
+            return 1;
+        }
+        return 0;
 }
