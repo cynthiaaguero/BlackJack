@@ -62,7 +62,7 @@ function startGame(){
         yourAceCount += checkAce(card);
         document.getElementById("your-cards").append(cardImg);
     }
-
+    document.getElementById("your-sum").innerText = yourSum; 
     document.getElementById("hit").addEventListener("click", hit);
     document.getElementById("stay").addEventListener("click", stay);
 }
@@ -80,7 +80,12 @@ function hit(){
 
     if(reduceAce(yourSum, yourAceCount) > 21){
         canHit = false;
+        document.getElementById("your-sum").innerText = yourSum; 
+        document.getElementById("dealer-sum").innerText = dealerSum; 
+        document.getElementById("results").innerText = "You lose!"; 
+    
     }
+    document.getElementById("your-sum").innerText = yourSum; 
 }
 
 function stay(){
@@ -106,7 +111,7 @@ function stay(){
     else if (yourSum < dealerSum){
         message = "You lose!";
 
-        
+
     }
     document.getElementById("your-sum").innerText = yourSum; 
     document.getElementById("dealer-sum").innerText = dealerSum; 
