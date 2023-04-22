@@ -77,6 +77,48 @@ function hit(){
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);
+
+    if(reduceAce(yourSum, yourAceCount) > 21){
+        canHit = false;
+    }
+}
+
+function stay(){
+    dealerSum = reduceAce(dealerSum, dealerAceCount);
+    yourSum = reduceAce(yourSum, yourAceCount);
+
+    canHit = false;
+    document.getElementById("hidden").src = "./cards/" + hidden + ".png";
+
+    let message = "";
+    if (yourSum > 21){
+        message = "You lose!";
+    }
+    else if (dealerSum > 21){
+        message = "You win!";
+    }
+    else if (yourSum == dealerSum){
+        message = "Tie!";
+    }
+    else if (yourSum > dealerSum){
+        message = "You win!";
+    }
+    else if (yourSum < dealerSum){
+        message = "You lose!";
+
+        
+    }
+    document.getElementById("your-sum").innerText = yourSum; 
+    document.getElementById("dealer-sum").innerText = dealerSum; 
+    document.getElementById("results").innerText = message; 
+}
+
+function reduceAce(sum, aceCount){
+    while(sum > 21 && aceCount > 0){
+        sum -= 10
+        aceCount -= 1;
+    }
+    return sum;
 }
 
 function getValue(card){
